@@ -9,7 +9,7 @@ import org.json.JSONException;
 import android.content.Context;
 import android.net.Uri;
 import android.content.Intent;
-import android.support.v4.content.FileProvider;
+import androidx.core.content.FileProvider;
 import android.webkit.MimeTypeMap;
 import android.content.ActivityNotFoundException;
 import android.os.Build;
@@ -70,8 +70,7 @@ public class Open extends CordovaPlugin {
                 if (Build.VERSION.SDK_INT >= 24) {
                     Context context = cordova.getActivity().getApplicationContext();
                     File imageFile = new File(uri.getPath());
-                    Uri photoURI = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", imageFile);
-                    fileIntent.setDataAndTypeAndNormalize(photoURI, mime);
+                    Uri photoURI = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", imageFile);                    fileIntent.setDataAndTypeAndNormalize(photoURI, mime);
                     // see http://stackoverflow.com/questions/39450748/intent-shows-a-blank-image
                     fileIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 } else if (Build.VERSION.SDK_INT > 15) {
